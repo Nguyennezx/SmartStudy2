@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Shared size for navigation vectors and BottomNavigationView icons. -->
+    <dimen name="navigation_icon_size">24dp</dimen>
+</resources>

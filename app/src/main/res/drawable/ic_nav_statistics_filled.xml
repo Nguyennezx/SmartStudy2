@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/navigation_icon_size" android:height="@dimen/navigation_icon_size"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FF000000" android:fillType="evenOdd"
+        android:pathData="M2,12 H6 V22 H2 Z M10,7 H14 V22 H10 Z M18,2 H22 V22 H18 Z" />
+</vector>
+

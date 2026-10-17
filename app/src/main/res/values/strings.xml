@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SmartStudy</string>
+    <string name="nav_home">Hôm nay</string>
+    <string name="nav_schedule">Lịch học</string>
+    <string name="nav_study">Học tập</string>
+    <string name="nav_device">Thiết bị</string>
+    <string name="nav_statistics">Thống kê</string>
+    <string name="header_brand">Smart<font color="#6C7EE1">Study</font></string>
+    <string name="header_subtitle">Bài tập và tập trung</string>
+    <string name="header_notifications">Thông báo</string>
+    <string name="header_profile">Hồ sơ cá nhân</string>
+</resources>

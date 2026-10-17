@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="PeriwinkleBlue">#6C7EE1</color>
+    <color name="PowderBlue">#92B9E3</color>
+    <color name="Peach">#FFC4A4</color>
+    <color name="PastelPink">#FBA2D0</color>
+    <color name="LightOrchid">#C688EB</color>
+    <color name="header_title">#20243A</color>
+    <color name="header_subtitle">#9297AC</color>
+    <color name="header_icon">#414761</color>
+    <color name="header_avatar_background">#EBEDF5</color>
+    <color name="header_avatar_foreground">#737C96</color>
+    <color name="header_notification_dot">#EF5B9B</color>
+</resources>

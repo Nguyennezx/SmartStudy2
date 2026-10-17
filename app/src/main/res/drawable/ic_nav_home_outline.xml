@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/navigation_icon_size" android:height="@dimen/navigation_icon_size"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000" android:strokeWidth="2"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M3,10 L11,2.8 Q12,1.9 13,2.8 L21,10 Q22,11 20.5,11 H20 V21 H15 V16 Q15,14 13,14 H11 Q9,14 9,16 V21 H4 V11 H3.5 Q2,11 3,10 Z" />
+</vector>
+
