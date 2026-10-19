@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/semester_name_label"
+            android:labelFor="@id/semester_input_name"
+            android:textColor="@color/header_title" />
+
+        <EditText
+            android:id="@+id/semester_input_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:inputType="textCapSentences"
+            android:imeOptions="actionDone"
+            android:hint="@string/semester_name_hint"
+            android:textColor="@color/header_title"
+            android:textColorHint="@color/header_icon"
+            android:backgroundTint="@color/PeriwinkleBlue" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/semester_start"
+            android:labelFor="@id/semester_input_start"
+            android:textColor="@color/header_title" />
+
+        <Button
+            android:id="@+id/semester_input_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:textColor="@color/header_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/semester_end"
+            android:labelFor="@id/semester_input_end"
+            android:textColor="@color/header_title" />
+
+        <Button
+            android:id="@+id/semester_input_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:textColor="@color/header_title" />
+
+        <TextView
+            android:id="@+id/semester_form_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/header_title"
+            android:visibility="gone"
+            android:accessibilityLiveRegion="polite" />
+
+    </LinearLayout>
+
+</ScrollView>

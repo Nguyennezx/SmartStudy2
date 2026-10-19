@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subject_title">Môn học</string>
+    <string name="subject_subtitle">Chạm vào môn để sửa hoặc lưu trữ.</string>
+    <string name="subject_back">Quay lại</string>
+    <string name="subject_add">Thêm môn học</string>
+    <string name="subject_edit">Sửa môn học</string>
+    <string name="subject_save">Lưu</string>
+    <string name="subject_cancel">Hủy</string>
+    <string name="subject_archive">Lưu trữ môn</string>
+    <string name="subject_restore">Khôi phục</string>
+    <string name="subject_archive_message">Môn sẽ ẩn khỏi danh sách đang dùng. Dữ liệu liên quan được giữ lại. Bạn có thể khôi phục môn sau.</string>
+    <string name="subject_restore_message">Đưa môn này trở lại danh sách đang dùng?</string>
+    <string name="subject_show_archived">Xem môn đã lưu trữ</string>
+    <string name="subject_empty">Chưa có môn học. Hãy thêm môn đầu tiên để chuẩn bị tạo lịch học.</string>
+    <string name="subject_empty_archived">Chưa có môn nào được lưu trữ.</string>
+    <string name="subject_loading">Đang tải môn học…</string>
+    <string name="subject_load_error">Không tải được môn học. Chạm vào đây để thử lại.</string>
+    <string name="subject_write_error">Chưa lưu được thay đổi. Vui lòng thử lại.</string>
+    <string name="subject_saved">Đã lưu môn học</string>
+    <string name="subject_archived">Đã lưu trữ môn học</string>
+    <string name="subject_restored">Đã khôi phục môn học</string>
+    <string name="subject_no_teacher">Chưa thêm giảng viên</string>
+    <string name="subject_name_label">Tên môn học *</string>
+    <string name="subject_name_hint">Ví dụ: Lập trình Java</string>
+    <string name="subject_name_required">Vui lòng nhập tên môn học</string>
+    <string name="subject_teacher_label">Giảng viên (tùy chọn)</string>
+    <string name="subject_teacher_hint">Tên giảng viên</string>
+    <string name="subject_color_label">Màu môn học</string>
+    <string name="subject_current_color">Giữ màu hiện tại</string>
+    <string name="subject_manage">Quản lý môn học</string>
+    <string name="schedule_subject_intro">Bắt đầu bằng cách thêm các môn học của bạn.</string>
+    <string-array name="subject_colors">
+        <item>Xanh tím</item>
+        <item>Xanh pastel</item>
+        <item>Cam đào</item>
+        <item>Hồng pastel</item>
+        <item>Tím orchid</item>
+    </string-array>
+    <string-array name="subject_actions">
+        <item>Sửa môn học</item>
+        <item>Lưu trữ môn</item>
+    </string-array>
+</resources>

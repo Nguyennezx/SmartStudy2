@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="semester_title">Học kỳ</string>
+    <string name="semester_manage">Quản lý học kỳ</string>
+    <string name="semester_add">Thêm học kỳ</string>
+    <string name="semester_edit">Sửa học kỳ</string>
+    <string name="semester_subtitle">Nhóm các môn theo học kỳ. Chạm một học kỳ để sửa.</string>
+    <string name="semester_loading">Đang tải học kỳ…</string>
+    <string name="semester_empty">Chưa có học kỳ. Thêm học kỳ đầu tiên để nhóm các môn học.</string>
+    <string name="semester_load_error">Không tải được học kỳ. Chạm để thử lại.</string>
+    <string name="semester_saved">Đã lưu học kỳ</string>
+    <string name="semester_name_label">Tên học kỳ *</string>
+    <string name="semester_name_hint">Ví dụ: Học kỳ 1 năm 2026–2027</string>
+    <string name="semester_start">Ngày bắt đầu</string>
+    <string name="semester_end">Ngày kết thúc</string>
+    <string name="semester_unassigned">Chưa chọn học kỳ</string>
+    <string name="semester_optional">Học kỳ (tùy chọn)</string>
+    <string name="semester_all">Tất cả học kỳ</string>
+    <string name="semester_archived">Học kỳ đã lưu trữ</string>
+    <string name="semester_filter_label">Lọc môn theo học kỳ</string>
+    <string name="semester_form_hint">Bạn có thể tạo học kỳ tại mục Quản lý học kỳ trước khi gán môn.</string>
+    <string name="subject_empty_filter">Chưa có môn học trong học kỳ đang chọn. Bạn có thể thêm môn hoặc đổi bộ lọc.</string>
+</resources>

@@ -9,7 +9,15 @@
 - Icon tô đầy khi chọn, icon viền khi chưa chọn.
 - Giữ trạng thái màn hình khi chuyển tab và khôi phục tab khi Activity được tạo lại.
 
-Các màn hình hiện là giao diện khung, chưa hoàn thiện chức năng học tập.
+Tab Lịch học có nút Quản lý môn học: thêm, sửa, chọn màu theo palette, lưu trữ và khôi phục môn bằng SQLite. Có quản lý học kỳ (tên, khoảng ngày), gán môn vào học kỳ và lọc môn theo học kỳ. Các màn hình còn lại đang là giao diện khung.
+
+Tab Lịch học có lịch Ngày/Tuần theo trục giờ, thẻ theo màu môn, chọn ngày và chuyển tuần. Chế độ tuần cuộn ngang để xem đủ 7 cột. Nút + thêm lịch vào ngày đang chọn; chạm thẻ để xem/sửa/xóa lịch lặp. Menu ⋮ mở quản lý môn hoặc tất cả lịch đã tạo. Có kiểm tra ngày/giờ và cảnh báo trùng buổi thực tế. Nhắc giờ học dùng AlarmManager và thông báo Android, có hướng dẫn cấp quyền trong tab Lịch học.
+
+Hướng dẫn phần người 2 và cách kiểm tra: [Quản lý môn học](docs/nguoi2-monhoc.md).
+
+Hướng dẫn lịch học: [Thêm và quản lý lịch học](docs/nguoi2-lichhoc.md).
+
+Hướng dẫn quyền và thử thông báo: [Nhắc giờ học](docs/nguoi2-nhaclich.md).
 
 ## Chạy dự án
 

@@ -1,16 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".schedule.ScheduleFragment">
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/nav_schedule"
-        android:textColor="@color/header_title"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_schedule"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/header_title" />
+
+        <TextView
+            android:id="@+id/schedule_add"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/calendar_plus"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_calendar_selected"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/schedule_add"
+            android:tooltipText="@string/schedule_add" />
+
+        <TextView
+            android:id="@+id/calendar_more"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/calendar_more_symbol"
+            android:textSize="26sp"
+            android:textColor="@color/header_icon"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/calendar_more_label"
+            android:tooltipText="@string/calendar_more_label" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp">
+
+            <LinearLayout
+                android:id="@+id/reminder_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="@drawable/bg_calendar_outline"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/reminder_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/header_icon"
+                    android:textSize="14sp"
+                    android:accessibilityLiveRegion="polite" />
+
+                <TextView
+                    android:id="@+id/reminder_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textColor="@color/PeriwinkleBlue"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/calendar_today"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:text="@string/calendar_today"
+                    android:textColor="@color/header_icon"
+                    android:textSize="15sp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/calendar_mode_day"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:text="@string/calendar_day"
+                    android:textColor="@color/header_icon"
+                    android:textSize="15sp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_calendar_choice"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/calendar_mode_week"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:text="@string/calendar_week"
+                    android:textColor="@color/header_icon"
+                    android:textSize="15sp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_calendar_choice" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/calendar_previous"
+                    android:layout_width="40dp"
+                    android:layout_height="48dp"
+                    android:text="@string/calendar_previous_symbol"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:textColor="@color/header_icon"
+                    android:background="@drawable/bg_calendar_outline"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="@string/calendar_previous_week" />
+
+                <TextView
+                    android:id="@+id/calendar_week_range"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/header_title"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="@string/calendar_choose_date" />
+
+                <TextView
+                    android:id="@+id/calendar_next"
+                    android:layout_width="40dp"
+                    android:layout_height="48dp"
+                    android:text="@string/calendar_next_symbol"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:textColor="@color/header_icon"
+                    android:background="@drawable/bg_calendar_outline"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="@string/calendar_next_week" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/calendar_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:baselineAligned="false" />
+
+            <TextView
+                android:id="@+id/calendar_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/header_title"
+                android:textStyle="bold"
+                android:accessibilityLiveRegion="polite" />
+
+            <TextView
+                android:id="@+id/calendar_zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/header_icon" />
+
+            <TextView
+                android:id="@+id/schedule_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                android:textSize="16sp"
+                android:textColor="@color/header_icon"
+                android:gravity="center"
+                android:accessibilityLiveRegion="polite" />
+
+            <HorizontalScrollView
+                android:id="@+id/calendar_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:layout_marginTop="12dp"
+                android:scrollbars="horizontal">
+
+                <com.example.smartstudy.schedule.ui.ScheduleTimelineView
+                    android:id="@+id/schedule_timeline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

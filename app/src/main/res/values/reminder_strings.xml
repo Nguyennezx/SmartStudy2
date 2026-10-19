@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reminder_channel_name">Nhắc giờ học</string>
+    <string name="reminder_channel_description">Nhắc các buổi học theo lịch và số phút bạn chọn.</string>
+    <string name="reminder_upcoming_title">Sắp đến giờ học: %1$s</string>
+    <string name="reminder_started_title">Đã đến giờ học: %1$s</string>
+    <string name="reminder_sync_failed">Chưa cập nhật được nhắc giờ học. Vui lòng thử lại.</string>
+    <string name="reminder_retry">Cập nhật lại nhắc lịch</string>
+    <string name="reminder_globally_disabled">Nhắc lịch đang tắt trong cài đặt chung của ứng dụng.</string>
+    <string name="reminder_requires_notification">Thông báo nhắc học đang bị tắt. Cho phép thông báo để nhận nhắc từ các lịch đã lưu.</string>
+    <string name="reminder_enable_notifications">Bật thông báo nhắc học</string>
+    <string name="reminder_requires_exact">Android chưa cho phép nhắc chính xác. App vẫn đặt nhắc, nhưng thông báo có thể đến trễ.</string>
+    <string name="reminder_enable_exact">Cho phép nhắc đúng giờ</string>
+    <string name="reminder_settings_unavailable">Không mở được cài đặt. Bạn có thể bật thông báo và Báo thức, lời nhắc trong Cài đặt của điện thoại.</string>
+</resources>

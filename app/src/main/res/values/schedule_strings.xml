@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="schedule_add">Thêm lịch học</string>
+    <string name="schedule_edit">Sửa lịch học</string>
+    <string name="schedule_save">Lưu lịch học</string>
+    <string name="schedule_delete">Xóa lịch học</string>
+    <string name="schedule_delete_message">Xóa toàn bộ lịch lặp này và các buổi đổi/hủy riêng thuộc lịch? Môn học vẫn được giữ lại.</string>
+    <string name="schedule_deleted">Đã xóa lịch học</string>
+    <string name="schedule_saved">Đã lưu lịch học</string>
+    <string name="schedule_loading">Đang tải lịch học…</string>
+    <string name="schedule_empty">Chưa có lịch học. Thêm buổi học đầu tiên từ các môn của bạn.</string>
+    <string name="schedule_load_error">Không tải được dữ liệu. Chạm để thử lại.</string>
+    <string name="schedule_list_hint">Lịch lặp theo tuần, sắp xếp theo thứ và giờ. Chạm một dòng để sửa hoặc xóa.</string>
+    <string name="schedule_need_subject">Vui lòng vào Quản lý môn học để thêm hoặc khôi phục môn, rồi quay lại chọn môn cho lịch.</string>
+    <string name="schedule_subject_label">Môn học *</string>
+    <string name="schedule_day_label">Thứ trong tuần *</string>
+    <string name="schedule_start_label">Giờ bắt đầu *</string>
+    <string name="schedule_end_label">Giờ kết thúc *</string>
+    <string name="schedule_choose_time">Chọn giờ</string>
+    <string name="schedule_choose_date">Chọn ngày</string>
+    <string name="schedule_midnight_hint">Chọn 00:00 ở giờ kết thúc nghĩa là 24:00, cuối cùng ngày. Lịch qua đêm cần tách thành hai buổi.</string>
+    <string name="schedule_from_label">Áp dụng từ ngày *</string>
+    <string name="schedule_to_label">Đến hết ngày *</string>
+    <string name="schedule_room_label">Phòng học (tùy chọn)</string>
+    <string name="schedule_room_hint">Ví dụ: Phòng A203</string>
+    <string name="schedule_note_label">Ghi chú (tùy chọn)</string>
+    <string name="schedule_note_hint">Ví dụ: Mang laptop</string>
+    <string name="schedule_reminder_label">Nhắc trước giờ học</string>
+    <string name="schedule_reminder_off">Không nhắc</string>
+    <string name="schedule_reminder_at_start">Đúng giờ bắt đầu</string>
+    <string name="schedule_reminder_minutes">Trước %1$d phút</string>
+    <string name="schedule_reminder_pending">Nhắc theo múi giờ của lịch. Kiểm tra quyền thông báo và nhắc đúng giờ trong tab Lịch học.</string>
+    <string name="schedule_no_room">Chưa thêm phòng học</string>
+    <string name="schedule_time_zone">Giờ học theo múi giờ: %1$s</string>
+    <string name="schedule_saving">Đang lưu lịch học, vui lòng chờ.</string>
+
+    <string-array name="schedule_days">
+        <item>Thứ Hai</item>
+        <item>Thứ Ba</item>
+        <item>Thứ Tư</item>
+        <item>Thứ Năm</item>
+        <item>Thứ Sáu</item>
+        <item>Thứ Bảy</item>
+        <item>Chủ nhật</item>
+    </string-array>
+
+    <string-array name="schedule_actions">
+        <item>Sửa lịch học</item>
+        <item>Xóa lịch học</item>
+    </string-array>
+</resources>

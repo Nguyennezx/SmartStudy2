@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/schedule_edit_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp">
+
+        <Button
+            android:id="@+id/schedule_edit_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subject_back"
+            android:textColor="@color/header_icon"
+            style="@style/Widget.Material3.Button.TextButton" />
+
+        <TextView
+            android:id="@+id/schedule_edit_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/schedule_add"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/header_title" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/schedule_edit_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/schedule_edit_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:textColor="@color/header_title"
+                android:accessibilityLiveRegion="polite" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_subject_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_subject" />
+
+            <Spinner
+                android:id="@+id/schedule_input_subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:saveEnabled="false" />
+
+            <Button
+                android:id="@+id/schedule_edit_subjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/subject_manage"
+                android:textColor="@color/PeriwinkleBlue"
+                style="@style/Widget.Material3.Button.TextButton" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_day_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_day" />
+
+            <Spinner
+                android:id="@+id/schedule_input_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:saveEnabled="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_start_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_start" />
+
+            <Button
+                android:id="@+id/schedule_input_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/schedule_choose_time"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="@color/header_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_end_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_end" />
+
+            <Button
+                android:id="@+id/schedule_input_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/schedule_choose_time"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="@color/header_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_midnight_hint"
+                android:textColor="@color/header_title"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_from_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_from" />
+
+            <Button
+                android:id="@+id/schedule_input_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/schedule_choose_date"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="@color/header_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_to_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_to" />
+
+            <Button
+                android:id="@+id/schedule_input_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/schedule_choose_date"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="@color/header_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_room_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_room" />
+
+            <EditText
+                android:id="@+id/schedule_input_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:hint="@string/schedule_room_hint"
+                android:inputType="textCapSentences"
+                android:textColor="@color/header_title"
+                android:textColorHint="@color/header_icon"
+                android:backgroundTint="@color/PeriwinkleBlue" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_note_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_note" />
+
+            <EditText
+                android:id="@+id/schedule_input_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:hint="@string/schedule_note_hint"
+                android:inputType="textCapSentences|textMultiLine"
+                android:textColor="@color/header_title"
+                android:textColorHint="@color/header_icon"
+                android:backgroundTint="@color/PeriwinkleBlue" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_reminder_label"
+                android:textColor="@color/header_title"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/schedule_input_reminder" />
+
+            <Spinner
+                android:id="@+id/schedule_input_reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:saveEnabled="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_reminder_pending"
+                android:textColor="@color/header_title"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/schedule_zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/header_icon"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/schedule_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:minHeight="52dp"
+        android:text="@string/schedule_save"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/PeriwinkleBlue" />
+
+</LinearLayout>

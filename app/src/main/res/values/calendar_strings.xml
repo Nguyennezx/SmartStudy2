@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendar_compact_week">%1$d – %2$d tháng %3$d, %4$d</string>
+    <string name="calendar_plus">+</string>
+    <string name="calendar_more_symbol">⋮</string>
+    <string name="calendar_more_label">Quản lý môn và lịch đã tạo</string>
+    <string name="calendar_previous_symbol">‹</string>
+    <string name="calendar_next_symbol">›</string>
+    <string name="calendar_previous_week">Tuần trước</string>
+    <string name="calendar_next_week">Tuần sau</string>
+    <string name="calendar_today">Hôm nay</string>
+    <string name="calendar_day">Ngày</string>
+    <string name="calendar_week">Tuần</string>
+    <string name="calendar_choose_date">Chọn ngày để xem lịch</string>
+    <string name="calendar_day_count">%1$d buổi học trong ngày</string>
+    <string name="calendar_week_count">%1$d buổi học trong tuần</string>
+    <string name="calendar_empty_day">Không có lịch học trong ngày này. Chọn ngày khác hoặc bấm + để thêm lịch.</string>
+    <string name="calendar_empty_week">Không có lịch học trong tuần này. Bấm + để thêm lịch học.</string>
+    <string name="calendar_moved">Buổi học đã dời lịch</string>
+    <string name="calendar_all_schedules">Tất cả lịch đã tạo</string>
+    <string name="calendar_edit_series">Sửa lịch lặp</string>
+    <string name="calendar_delete_series">Xóa lịch lặp</string>
+    <string name="calendar_series_hint">Thao tác sửa hoặc xóa áp dụng cho cả lịch lặp, không chỉ buổi đang xem.</string>
+
+    <string-array name="calendar_short_days">
+        <item>T2</item>
+        <item>T3</item>
+        <item>T4</item>
+        <item>T5</item>
+        <item>T6</item>
+        <item>T7</item>
+        <item>CN</item>
+    </string-array>
+
+    <string-array name="calendar_more_actions">
+        <item>Quản lý môn học và học kỳ</item>
+        <item>Tất cả lịch đã tạo</item>
+    </string-array>
+</resources>

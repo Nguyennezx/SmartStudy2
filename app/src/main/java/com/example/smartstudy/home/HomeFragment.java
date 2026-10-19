@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartstudy.R;
+import com.example.smartstudy.schedule.reminder.ReminderCoordinator;
 
 public class HomeFragment extends Fragment {
 
@@ -20,6 +21,12 @@ public class HomeFragment extends Fragment {
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ReminderCoordinator.refresh(requireContext());
     }
 
     @Override
