@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="112dp"
+    android:height="104dp"
+    android:viewportWidth="112"
+    android:viewportHeight="104">
+
+    <path
+        android:fillColor="@color/header_avatar_background"
+        android:pathData="M27,20 L77,20 Q88,20 88,31 L88,78 Q88,89 77,89 L27,89 Q16,89 16,78 L16,31 Q16,20 27,20 Z" />
+
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M20,39 L84,39 L84,78 Q84,85 77,85 L27,85 Q20,85 20,78 Z" />
+
+    <path
+        android:strokeColor="@color/PeriwinkleBlue"
+        android:strokeAlpha="0.35"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M27,20 L77,20 Q88,20 88,31 L88,78 Q88,89 77,89 L27,89 Q16,89 16,78 L16,31 Q16,20 27,20 Z" />
+
+    <path
+        android:strokeColor="@color/PeriwinkleBlue"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M33,13 L33,29 M70,13 L70,29" />
+
+    <path
+        android:fillColor="@color/header_avatar_background"
+        android:pathData="M30,49 h10 v10 h-10 Z M47,49 h10 v10 h-10 Z M64,49 h10 v10 h-10 Z M30,66 h10 v10 h-10 Z M47,66 h10 v10 h-10 Z" />
+
+    <path
+        android:fillColor="@color/PeriwinkleBlue"
+        android:pathData="M103,80 A19,19 0,1 1,65 80 A19,19 0,1 1,103 80" />
+
+    <path
+        android:strokeColor="@color/white"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M84,71 L84,89 M75,80 L93,80" />
+
+</vector>

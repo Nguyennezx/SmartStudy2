@@ -14,6 +14,13 @@
     <string name="calendar_choose_date">Chọn ngày để xem lịch</string>
     <string name="calendar_day_count">%1$d buổi học trong ngày</string>
     <string name="calendar_week_count">%1$d buổi học trong tuần</string>
+    <string name="calendar_count">%1$d buổi học</string>
+    <string name="calendar_zone_vietnam">Giờ Việt Nam</string>
+    <string name="calendar_zone_other">Giờ %1$s</string>
+    <string name="calendar_empty_day_title">Ngày này chưa có lịch học</string>
+    <string name="calendar_empty_week_title">Tuần này chưa có lịch học</string>
+    <string name="calendar_empty_hint">Thêm lịch để theo dõi các buổi học của bạn.</string>
+    <string name="calendar_add_action">+ Thêm lịch học</string>
     <string name="calendar_empty_day">Không có lịch học trong ngày này. Chọn ngày khác hoặc bấm + để thêm lịch.</string>
     <string name="calendar_empty_week">Không có lịch học trong tuần này. Bấm + để thêm lịch học.</string>
     <string name="calendar_moved">Buổi học đã dời lịch</string>

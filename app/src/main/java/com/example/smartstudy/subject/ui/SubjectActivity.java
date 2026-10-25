@@ -7,7 +7,7 @@ import android.content.res.ColorStateList;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -57,7 +57,8 @@ public class SubjectActivity extends AppCompatActivity {
 
     private SubjectAdapter adapter;
     private TextView status;
-    private CheckBox archivedFilter;
+    private CompoundButton archivedFilter;
+    private TextView count;
     private Button addButton;
     private boolean busy;
     private AlertDialog formDialog;
@@ -91,6 +92,7 @@ public class SubjectActivity extends AppCompatActivity {
             pendingDraft = new Bundle(state);
         adapter = new SubjectAdapter(this);
         status = filters.findViewById(R.id.subject_status);
+        count = filters.findViewById(R.id.subject_count);
         archivedFilter = filters.findViewById(R.id.subject_archived_filter);
         if (state != null)
             archivedFilter.setChecked(state.getBoolean("archived_filter"));
@@ -155,6 +157,7 @@ public class SubjectActivity extends AppCompatActivity {
         long filterId = selectedSemester;
         int version = ++loadVersion;
         setBusy(true);
+        count.setText(R.string.subject_count_loading);
         status.setVisibility(View.VISIBLE);
         status.setText(R.string.subject_loading);
         executor.execute(() -> {
@@ -167,6 +170,7 @@ public class SubjectActivity extends AppCompatActivity {
                     semesters = loadedSemesters;
                     updateSemesterFilter();
                     adapter.setSubjects(subjects);
+                    count.setText(getString(R.string.subject_count, subjects.size()));
                     setBusy(false);
                     status.setText(archived ? R.string.subject_empty_archived
                             : filterId == SubjectDAO.ALL_SEMESTERS
@@ -179,6 +183,7 @@ public class SubjectActivity extends AppCompatActivity {
                     if (!alive() || version != loadVersion)
                         return;
                     adapter.setSubjects(java.util.Collections.emptyList());
+                    count.setText(R.string.subject_count_unavailable);
                     setBusy(false);
                     status.setText(R.string.subject_load_error);
                     status.setVisibility(View.VISIBLE);
@@ -241,6 +246,18 @@ public class SubjectActivity extends AppCompatActivity {
                         return;
                     toast(archived ? R.string.subject_archived : R.string.subject_restored);
                     loadSubjects();
+                });
+            } catch (IllegalArgumentException conflict) {
+                runOnUiThread(() -> {
+                    if (!alive()) {
+                        return;
+                    }
+                    setBusy(false);
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.subject_restore_blocked)
+                            .setMessage(conflict.getMessage())
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show();
                 });
             } catch (Exception error) {
                 showWriteError();

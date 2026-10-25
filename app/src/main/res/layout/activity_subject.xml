@@ -14,22 +14,39 @@
         android:gravity="center_vertical"
         android:padding="16dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/subject_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/subject_back"
-            android:textColor="@color/header_icon"
-            style="@style/Widget.Material3.Button.TextButton" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_subject_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/subject_back" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/subject_title"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/header_title" />
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/subject_title"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/header_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/subject_screen_hint"
+                android:textSize="14sp"
+                android:textColor="@color/header_icon" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -49,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:minHeight="52dp"
-        android:text="@string/subject_add"
+        android:text="@string/subject_add_action"
         android:backgroundTint="@color/PeriwinkleBlue"
         android:textColor="@color/white" />
 

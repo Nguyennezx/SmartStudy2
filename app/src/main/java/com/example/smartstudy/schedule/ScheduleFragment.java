@@ -55,7 +55,7 @@ public class ScheduleFragment extends Fragment {
     private ScheduleTimelineView timeline;
     private LocalDate selectedDate;
     private ZoneId displayZone = ZoneId.of("Asia/Ho_Chi_Minh");
-    private boolean weekMode;
+    private boolean weekMode = true;
     private boolean busy;
     private boolean dataReady;
     private int loadVersion;
@@ -99,13 +99,8 @@ public class ScheduleFragment extends Fragment {
                 showActions(event.getSchedule(), event);
             }
         });
-        screen.findViewById(R.id.schedule_add).setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), ScheduleEditActivity.class);
-            if (selectedDate != null) {
-                intent.putExtra(ScheduleEditActivity.EXTRA_DATE, selectedDate.toString());
-            }
-            startActivity(intent);
-        });
+        screen.findViewById(R.id.schedule_add).setOnClickListener(v -> openAddSchedule());
+        screen.findViewById(R.id.calendar_empty_add).setOnClickListener(v -> openAddSchedule());
         screen.findViewById(R.id.calendar_more).setOnClickListener(v -> showMore());
         screen.findViewById(R.id.calendar_previous).setOnClickListener(v -> changeWeek(-1));
         screen.findViewById(R.id.calendar_next).setOnClickListener(v -> changeWeek(1));
@@ -142,6 +137,17 @@ public class ScheduleFragment extends Fragment {
             selectedDate = selectedDate.plusWeeks(amount);
             loadSchedules();
         }
+    }
+
+    private void openAddSchedule() {
+        if (busy) {
+            return;
+        }
+        Intent intent = new Intent(requireContext(), ScheduleEditActivity.class);
+        if (selectedDate != null) {
+            intent.putExtra(ScheduleEditActivity.EXTRA_DATE, selectedDate.toString());
+        }
+        startActivity(intent);
     }
 
     private void refreshReminders() {
@@ -243,6 +249,8 @@ public class ScheduleFragment extends Fragment {
         int version = ++loadVersion;
         dataReady = false;
         setBusy(true);
+        screen.findViewById(R.id.calendar_empty).setVisibility(View.GONE);
+        screen.findViewById(R.id.calendar_horizontal).setVisibility(View.GONE);
         if (selectedDate != null) {
             renderHeader();
         }
@@ -300,14 +308,22 @@ public class ScheduleFragment extends Fragment {
         for (ScheduleOccurrence event : visible) {
             unique.add(event.getOccurrenceKey());
         }
-        ((TextView) screen.findViewById(R.id.calendar_summary)).setText(getString(
-                weekMode ? R.string.calendar_week_count : R.string.calendar_day_count, unique.size()));
-        ((TextView) screen.findViewById(R.id.calendar_zone)).setText(
-                getString(R.string.schedule_time_zone, displayZone.getId()));
+        TextView summary = screen.findViewById(R.id.calendar_summary);
+        summary.setText(getString(R.string.calendar_count, unique.size()));
+        summary.setContentDescription(getString(weekMode
+                ? R.string.calendar_week_count : R.string.calendar_day_count, unique.size()));
+        TextView zone = screen.findViewById(R.id.calendar_zone);
+        zone.setText(displayZone.getId().equals("Asia/Ho_Chi_Minh")
+                ? getString(R.string.calendar_zone_vietnam)
+                : getString(R.string.calendar_zone_other, displayZone.getId()));
+        zone.setContentDescription(getString(R.string.schedule_time_zone, displayZone.getId()));
         status.setOnClickListener(null);
-        status.setText(weekMode ? R.string.calendar_empty_week : R.string.calendar_empty_day);
-        status.setVisibility(visible.isEmpty() ? View.VISIBLE : View.GONE);
-        timeline.setVisibility(visible.isEmpty() ? View.GONE : View.VISIBLE);
+        status.setVisibility(View.GONE);
+        screen.findViewById(R.id.calendar_empty).setVisibility(visible.isEmpty() ? View.VISIBLE : View.GONE);
+        ((TextView) screen.findViewById(R.id.calendar_empty_title)).setText(weekMode
+                ? R.string.calendar_empty_week_title : R.string.calendar_empty_day_title);
+        screen.findViewById(R.id.calendar_horizontal).setVisibility(visible.isEmpty() ? View.GONE : View.VISIBLE);
+        timeline.setVisibility(View.VISIBLE);
         timeline.setData(selectedDate, weekMode, displayZone, occurrences);
         if (revealSelectedDay) {
             HorizontalScrollView scroll = screen.findViewById(R.id.calendar_horizontal);
@@ -326,7 +342,9 @@ public class ScheduleFragment extends Fragment {
         String range = monday.getMonth() == sunday.getMonth() && monday.getYear() == sunday.getYear()
                 ? getString(R.string.calendar_compact_week, monday.getDayOfMonth(), sunday.getDayOfMonth(),
                         monday.getMonthValue(), monday.getYear())
-                : monday.format(dateFormat) + " – " + sunday.format(dateFormat);
+                : monday.getYear() == sunday.getYear()
+                        ? monday.format(DateTimeFormatter.ofPattern("dd/MM")) + " – " + sunday.format(dateFormat)
+                        : monday.format(dateFormat) + " – " + sunday.format(dateFormat);
         ((TextView) screen.findViewById(R.id.calendar_week_range)).setText(range);
         screen.findViewById(R.id.calendar_week_range).setContentDescription(
                 getString(R.string.calendar_choose_date) + ", " + selectedDate.format(dateFormat));
@@ -345,16 +363,15 @@ public class ScheduleFragment extends Fragment {
             View chip = getLayoutInflater().inflate(R.layout.view_calendar_day, days, false);
             boolean selected = day.equals(selectedDate);
             chip.setSelected(selected);
+            chip.findViewById(R.id.calendar_chip_body).setSelected(selected);
             ((TextView) chip.findViewById(R.id.calendar_chip_weekday)).setText(labels[i]);
             ((TextView) chip.findViewById(R.id.calendar_chip_date)).setText(String.valueOf(day.getDayOfMonth()));
             int textColor = ContextCompat.getColor(requireContext(),
                     selected ? R.color.white : R.color.header_title);
             ((TextView) chip.findViewById(R.id.calendar_chip_weekday)).setTextColor(textColor);
             ((TextView) chip.findViewById(R.id.calendar_chip_date)).setTextColor(textColor);
-            View dot = chip.findViewById(R.id.calendar_chip_today);
-            dot.setVisibility(day.equals(today) ? View.VISIBLE : View.INVISIBLE);
-            dot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(ContextCompat.getColor(
-                    requireContext(), selected ? R.color.white : R.color.PeriwinkleBlue)));
+            chip.findViewById(R.id.calendar_chip_today).setVisibility(
+                    day.equals(today) ? View.VISIBLE : View.GONE);
             chip.setContentDescription(day.format(dateFormat)
                     + (day.equals(today) ? ", " + getString(R.string.calendar_today) : ""));
             chip.setOnClickListener(v -> {
@@ -479,6 +496,7 @@ public class ScheduleFragment extends Fragment {
     private void setBusy(boolean value) {
         busy = value;
         screen.findViewById(R.id.schedule_add).setEnabled(!value);
+        screen.findViewById(R.id.calendar_empty_add).setEnabled(!value);
         screen.findViewById(R.id.calendar_more).setEnabled(!value);
     }
 

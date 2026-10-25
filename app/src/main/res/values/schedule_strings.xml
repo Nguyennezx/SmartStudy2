@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="schedule_add">Thêm lịch học</string>
+    <string name="schedule_form_subtitle">Sắp xếp buổi học của bạn</string>
+    <string name="schedule_form_info">Thông tin buổi học</string>
+    <string name="schedule_form_range">Thời gian áp dụng</string>
+    <string name="schedule_manage_short">Quản lý môn</string>
+    <string name="schedule_start_short">Bắt đầu *</string>
+    <string name="schedule_end_short">Kết thúc *</string>
+    <string name="schedule_from_short">Từ ngày *</string>
+    <string name="schedule_to_short">Đến ngày *</string>
+    <string name="schedule_recurrence_hint">Lịch lặp hằng tuần trong khoảng ngày đã chọn.</string>
+    <string name="schedule_zone_vietnam">Giờ Việt Nam (UTC+7)</string>
     <string name="schedule_edit">Sửa lịch học</string>
     <string name="schedule_save">Lưu lịch học</string>
     <string name="schedule_delete">Xóa lịch học</string>
@@ -13,6 +23,7 @@
     <string name="schedule_list_hint">Lịch lặp theo tuần, sắp xếp theo thứ và giờ. Chạm một dòng để sửa hoặc xóa.</string>
     <string name="schedule_need_subject">Vui lòng vào Quản lý môn học để thêm hoặc khôi phục môn, rồi quay lại chọn môn cho lịch.</string>
     <string name="schedule_subject_label">Môn học *</string>
+    <string name="schedule_select_subject">Vui lòng chọn lại môn học</string>
     <string name="schedule_day_label">Thứ trong tuần *</string>
     <string name="schedule_start_label">Giờ bắt đầu *</string>
     <string name="schedule_end_label">Giờ kết thúc *</string>

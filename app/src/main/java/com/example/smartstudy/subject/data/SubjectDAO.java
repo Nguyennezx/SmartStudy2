@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.smartstudy.core.database.DatabaseHelper;
 import com.example.smartstudy.schedule.reminder.ReminderCoordinator;
+import com.example.smartstudy.schedule.data.ScheduleDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,8 +117,9 @@ public class SubjectDAO {
         db.beginTransaction();
         try {
             long created;
+            boolean wasArchived;
             try (Cursor cursor = db.query("subjects", new String[] {
-                "created_at_ms"
+                "created_at_ms", "is_archived"
             },
                     "id = ?", new String[] {
                 String.valueOf(id)
@@ -125,6 +127,12 @@ public class SubjectDAO {
                 if (!cursor.moveToFirst())
                     return false;
                 created = cursor.getLong(0);
+                wasArchived = cursor.getInt(1) == 1;
+            }
+
+            if (wasArchived && values.containsKey("is_archived")
+                    && values.getAsInteger("is_archived") == 0) {
+                new ScheduleDAO(helper).validateSubjectRestore(id);
             }
 
             values.put("updated_at_ms", Math.max(created, System.currentTimeMillis()));

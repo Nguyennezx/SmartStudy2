@@ -80,6 +80,54 @@ public final class ScheduleRules {
                 && end.isAfter(instant(otherDate, otherStart, otherZone));
     }
 
+    /** Kiểm tra cả ngoại lệ của chuỗi được khôi phục, không tính lại buổi đã hủy/dời. */
+    public static Conflict findRestoreConflict(Schedule restoring, List<Schedule> schedules,
+                                               Map<Long, List<ScheduleException>> exceptions) {
+        List<ScheduleException> overrides = exceptions.getOrDefault(
+                restoring.getId(), Collections.emptyList());
+        if (overrides.isEmpty()) {
+            return findConflict(restoring, schedules, exceptions);
+        }
+        validate(restoring);
+        LocalDate first = LocalDate.parse(restoring.getValidFrom());
+        LocalDate last = LocalDate.parse(restoring.getValidTo());
+        for (LocalDate day = firstOccurrence(restoring); !day.isAfter(last); day = day.plusWeeks(1)) {
+            boolean replaced = false;
+            for (ScheduleException override : overrides) {
+                if (override.originalDate.equals(day.toString())) {
+                    replaced = true;
+                    break;
+                }
+            }
+            if (!replaced) {
+                Conflict conflict = findConflict(singleOccurrence(restoring, day,
+                        restoring.getStartMinute(), restoring.getEndMinute()), schedules, exceptions);
+                if (conflict != null) {
+                    return conflict;
+                }
+            }
+        }
+        for (ScheduleException override : overrides) {
+            LocalDate original = LocalDate.parse(override.originalDate);
+            if (override.newDate == null || original.isBefore(first) || original.isAfter(last)
+                    || original.getDayOfWeek().getValue() != restoring.getDayOfWeek()) {
+                continue;
+            }
+            Conflict conflict = findConflict(singleOccurrence(restoring, LocalDate.parse(override.newDate),
+                    override.startMinute, override.endMinute), schedules, exceptions);
+            if (conflict != null) {
+                return conflict;
+            }
+        }
+        return null;
+    }
+
+    private static Schedule singleOccurrence(Schedule source, LocalDate day, int start, int end) {
+        return new Schedule(source.getId(), source.getSubjectId(), day.getDayOfWeek().getValue(),
+                start, end, day.toString(), day.toString(), source.getTimeZoneId(),
+                source.getRoom(), source.getNote(), source.getRemindBeforeMinutes());
+    }
+
     /** So sánh những lần xuất hiện thật, có tính múi giờ và ngoại lệ đang có. */
     public static Conflict findConflict(Schedule candidate, List<Schedule> schedules,
                                         Map<Long, List<ScheduleException>> exceptions) {
@@ -119,7 +167,17 @@ public final class ScheduleRules {
                 }
                 // Buổi dời lịch có thể nằm ngoài khoảng ngày của chuỗi ban đầu.
                 for (ScheduleException override : overrides) {
-                    if (override.newDate != null && overlaps(start, end,
+                    if (override.newDate == null) {
+                        continue;
+                    }
+                    LocalDate original = LocalDate.parse(override.originalDate);
+                    // Giống lịch ngày/tuần: chỉ tính ngoại lệ thuộc một buổi gốc có thật.
+                    if (original.getDayOfWeek().getValue() != other.getDayOfWeek()
+                            || original.isBefore(LocalDate.parse(other.getValidFrom()))
+                            || original.isAfter(LocalDate.parse(other.getValidTo()))) {
+                        continue;
+                    }
+                    if (overlaps(start, end,
                             LocalDate.parse(override.newDate), override.startMinute,
                             override.endMinute, otherZone)) {
                         return new Conflict(other, LocalDate.parse(override.newDate),

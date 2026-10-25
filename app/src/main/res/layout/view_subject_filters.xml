@@ -1,52 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:text="@string/subject_subtitle"
-        android:textColor="@color/header_icon"
-        android:textSize="14sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
 
-    <Button
-        android:id="@+id/subject_manage_semesters"
+        <TextView
+            android:id="@+id/subject_count"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/subject_count_loading"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/header_title"
+            android:accessibilityLiveRegion="polite" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/subject_manage_semesters"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/subject_semester_action"
+            android:textColor="@color/PeriwinkleBlue"
+            app:icon="@drawable/ic_subject_semester"
+            app:iconSize="18dp"
+            app:iconTint="@color/PeriwinkleBlue"
+            app:strokeColor="@color/PeriwinkleBlue"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="@string/semester_manage"
-        android:textColor="@color/PeriwinkleBlue"
-        style="@style/Widget.Material3.Button.TextButton" />
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:background="@drawable/bg_subject_card">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/semester_filter_label"
+            android:labelFor="@id/subject_semester_filter"
+            android:textColor="@color/header_icon"
+            android:textSize="13sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_calendar_outline">
+
+            <Spinner
+                android:id="@+id/subject_semester_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:saveEnabled="false" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/header_avatar_background" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/subject_archived_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_subject_archive"
+            android:drawablePadding="8dp"
+            android:text="@string/subject_show_archived"
+            android:textSize="14sp"
+            android:textColor="@color/header_icon"
+            app:switchPadding="12dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:text="@string/semester_filter_label"
-        android:labelFor="@id/subject_semester_filter"
-        android:textColor="@color/header_icon" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <Spinner
-        android:id="@+id/subject_semester_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:layout_marginHorizontal="16dp"
-        android:saveEnabled="false" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/subject_list_heading"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/header_title" />
 
-    <CheckBox
-        android:id="@+id/subject_archived_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/subject_show_archived"
-        android:textColor="@color/header_icon"
-        android:buttonTint="@color/PeriwinkleBlue" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/subject_list_hint"
+            android:textSize="12sp"
+            android:textColor="@color/header_icon" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/subject_status"

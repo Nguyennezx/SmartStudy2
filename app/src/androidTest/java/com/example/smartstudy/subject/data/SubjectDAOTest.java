@@ -126,6 +126,35 @@ public class SubjectDAOTest {
         assertTrue(dao.getActiveSubjects().isEmpty());
     }
 
+    @Test public void conflictingRestoreRollsBackAndCanRetryAfterResolvingConflict() {
+        long first = dao.insert("Môn A", "", "#6C7EE1");
+        long second = dao.insert("Môn B", "", "#FFC4A4");
+        String insert = "INSERT INTO schedules(subject_id,day_of_week,start_minute,end_minute,"
+                + "valid_from,valid_to,time_zone_id,created_at_ms,updated_at_ms) "
+                + "VALUES(?,1,510,630,'2026-10-19','2026-10-19','Asia/Ho_Chi_Minh',1,1)";
+        db.execSQL(insert, new Object[]{first});
+        assertTrue(dao.setArchived(first, true));
+        db.execSQL(insert, new Object[]{second});
+        try {
+            dao.setArchived(first, false);
+            fail("Không được khôi phục môn làm trùng lịch");
+        } catch (IllegalArgumentException expected) {
+            assertTrue(expected.getMessage().contains("Môn B"));
+            assertTrue(expected.getMessage().contains("19/10/2026"));
+        }
+        assertEquals(first, dao.getByArchived(true).get(0).getId());
+        assertEquals(second, dao.getActiveSubjects().get(0).getId());
+        try (android.database.Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM schedules", null)) {
+            assertTrue(cursor.moveToFirst());
+            assertEquals(2, cursor.getInt(0));
+        }
+        db.execSQL("UPDATE schedules SET start_minute=630,end_minute=690 WHERE subject_id=?",
+                new Object[]{second});
+        assertTrue(dao.setArchived(first, false));
+        assertTrue(dao.getByArchived(true).isEmpty());
+        assertEquals(2, dao.getActiveSubjects().size());
+    }
+
     @Test public void emptyNameAndInvalidColorAreRejected() {
         try {
             dao.insert("   ", "", "#6C7EE1");

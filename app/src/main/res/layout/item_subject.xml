@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="88dp"
-    android:padding="16dp"
+    android:padding="14dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:background="@drawable/bg_subject_card">
 
     <View
         android:id="@+id/subject_color"
-        android:layout_width="12dp"
-        android:layout_height="48dp"
+        android:layout_width="8dp"
+        android:layout_height="56dp"
         android:background="@drawable/bg_subject_color"
         android:importantForAccessibility="no" />
 
@@ -20,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:orientation="vertical">
 
         <TextView
@@ -36,14 +36,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_subject_teacher"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
             android:textColor="@color/header_icon"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/subject_semester"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:drawableStart="@drawable/ic_subject_semester"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_subject_semester_badge"
             android:textColor="@color/header_icon"
             android:textSize="13sp" />
 
@@ -52,6 +61,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="›"
         android:textSize="28sp"
         android:textColor="@color/header_icon"

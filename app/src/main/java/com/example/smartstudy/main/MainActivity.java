@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+        // Root đã chừa chỗ cho system bars, không cộng lại inset vào thanh tab.
+        ViewCompat.setOnApplyWindowInsetsListener(navigation, (view, insets) -> insets);
         navigation.setSelectedItemId(selectedTabId);
         showTab(selectedTabId);
         navigation.setOnItemSelectedListener(item -> showTab(item.getItemId()));

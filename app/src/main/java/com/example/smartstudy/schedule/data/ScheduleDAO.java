@@ -26,7 +26,8 @@ public class ScheduleDAO {
         appContext = context.getApplicationContext();
     }
 
-    ScheduleDAO(DatabaseHelper helper) {
+    /** Dùng cùng Helper/transaction khi SubjectDAO kiểm tra khôi phục môn. */
+    public ScheduleDAO(DatabaseHelper helper) {
         this.helper = helper;
         appContext = null;
     }
@@ -40,6 +41,31 @@ public class ScheduleDAO {
         List<Schedule> schedules = read(SELECT + "WHERE s.id=? AND s.is_archived=0",
                 new String[]{String.valueOf(id)});
         return schedules.isEmpty() ? null : schedules.get(0);
+    }
+
+    /** Gọi trong transaction khôi phục môn, trước khi đổi is_archived. */
+    public void validateSubjectRestore(long subjectId) {
+        if (!helper.getWritableDatabase().inTransaction()) {
+            throw new IllegalStateException("Kiểm tra khôi phục phải nằm trong transaction.");
+        }
+        List<Schedule> restoring = read(SELECT + "WHERE s.subject_id=? AND s.is_archived=0",
+                new String[]{String.valueOf(subjectId)});
+        List<Schedule> visibleAfterRestore = getAll();
+        visibleAfterRestore.addAll(restoring);
+        Map<Long, List<ScheduleException>> exceptions = getExceptions();
+        for (Schedule schedule : restoring) {
+            ScheduleRules.Conflict conflict = ScheduleRules.findRestoreConflict(
+                    schedule, visibleAfterRestore, exceptions);
+            if (conflict != null) {
+                String date = conflict.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                throw new IllegalArgumentException("Lịch của môn này trùng với "
+                        + conflict.schedule.getSubjectName() + " ngày " + date + ", "
+                        + ScheduleRules.formatMinute(conflict.startMinute) + "–"
+                        + ScheduleRules.formatMinute(conflict.endMinute) + " ("
+                        + conflict.schedule.getTimeZoneId() + ").\n\n"
+                        + "Môn vẫn được lưu trữ. Vui lòng điều chỉnh lịch bị trùng rồi khôi phục lại.");
+            }
+        }
     }
 
     public String getDefaultTimeZone() {

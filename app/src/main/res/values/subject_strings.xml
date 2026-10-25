@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="subject_title">Môn học</string>
+    <string name="subject_screen_hint">Quản lý môn học của bạn</string>
+    <string name="subject_count">%1$d môn học</string>
+    <string name="subject_count_loading">Đang tải…</string>
+    <string name="subject_count_unavailable">Môn học</string>
+    <string name="subject_semester_action">Học kỳ</string>
+    <string name="subject_list_heading">Danh sách môn</string>
+    <string name="subject_list_hint">Chạm để chỉnh sửa</string>
+    <string name="subject_add_action">+ Thêm môn học</string>
     <string name="subject_subtitle">Chạm vào môn để sửa hoặc lưu trữ.</string>
     <string name="subject_back">Quay lại</string>
     <string name="subject_add">Thêm môn học</string>
@@ -20,6 +28,7 @@
     <string name="subject_saved">Đã lưu môn học</string>
     <string name="subject_archived">Đã lưu trữ môn học</string>
     <string name="subject_restored">Đã khôi phục môn học</string>
+    <string name="subject_restore_blocked">Chưa thể khôi phục môn</string>
     <string name="subject_no_teacher">Chưa thêm giảng viên</string>
     <string name="subject_name_label">Tên môn học *</string>
     <string name="subject_name_hint">Ví dụ: Lập trình Java</string>

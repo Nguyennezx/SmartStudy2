@@ -90,6 +90,18 @@ public class ScheduleRulesTest {
     }
 
     @Test
+    public void invalidOriginalExceptionDoesNotBlockAnUnrelatedLesson() {
+        Schedule existing = monday(1, 510, 630, "2026-10-19", "2026-10-19");
+        Schedule candidate = schedule(0, 2, 600, 660, "2026-10-20", "2026-10-20",
+                "Asia/Ho_Chi_Minh");
+        for (String original : new String[]{"2026-10-20", "2026-10-12"}) {
+            Map<Long, List<ScheduleException>> exceptions = Collections.singletonMap(1L,
+                    Arrays.asList(new ScheduleException(1, original, "2026-10-20", 600, 660)));
+            assertNull(ScheduleRules.findConflict(candidate, Arrays.asList(existing), exceptions));
+        }
+    }
+
+    @Test
     public void invalidDateTimeAndEmptyOccurrenceRangesAreRejected() {
         reject(monday(0, 630, 510, "2026-10-19", "2026-12-31"));
         reject(monday(0, 510, 510, "2026-10-19", "2026-12-31"));

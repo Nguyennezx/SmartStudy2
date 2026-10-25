@@ -2,4 +2,6 @@
 <resources>
     <!-- Shared size for navigation vectors and BottomNavigationView icons. -->
     <dimen name="navigation_icon_size">24dp</dimen>
+    <dimen name="navigation_min_height">64dp</dimen>
+    <dimen name="navigation_item_padding">8dp</dimen>
 </resources>

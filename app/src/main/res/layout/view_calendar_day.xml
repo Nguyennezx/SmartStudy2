@@ -4,41 +4,55 @@
     android:layout_width="0dp"
     android:layout_weight="1"
     android:layout_height="wrap_content"
-    android:minHeight="76dp"
     android:layout_marginHorizontal="2dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="6dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/bg_calendar_choice"
     android:clickable="true"
     android:focusable="true"
     android:importantForAccessibility="yes">
 
-    <TextView
-        android:id="@+id/calendar_chip_weekday"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/calendar_chip_body"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="11sp"
-        android:textColor="@color/header_icon"
-        android:importantForAccessibility="no" />
+        android:minHeight="52dp"
+        android:paddingVertical="4dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_calendar_choice">
+
+        <TextView
+            android:id="@+id/calendar_chip_weekday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:includeFontPadding="false"
+            android:textColor="@color/header_icon"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/calendar_chip_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="16sp"
+            android:includeFontPadding="false"
+            android:textStyle="bold"
+            android:textColor="@color/header_title"
+            android:importantForAccessibility="no" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/calendar_chip_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/header_title"
-        android:importantForAccessibility="no" />
-
-    <View
         android:id="@+id/calendar_chip_today"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@drawable/bg_calendar_today"
+        android:gravity="center"
+        android:text="@string/calendar_today"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:textColor="@color/PeriwinkleBlue"
         android:importantForAccessibility="no" />
 
 </LinearLayout>

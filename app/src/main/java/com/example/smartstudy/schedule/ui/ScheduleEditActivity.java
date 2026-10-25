@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -66,6 +67,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
         super.onCreate(state);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_schedule_edit);
+        adaptPickerRows();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.schedule_edit_root), (view, insets) -> {
             Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
             view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
@@ -184,13 +186,6 @@ public class ScheduleEditActivity extends AppCompatActivity {
     }
 
     private void populate(Schedule existing) {
-        List<String> names = new ArrayList<>();
-        for (Subject subject : subjects) {
-            String semester = subject.getSemesterName();
-            names.add(subject.getName() + (semester == null ? "" : " · " + semester));
-        }
-        subjectSpinner.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, names));
         long subjectId = draft != null && draft.containsKey("subject_id")
                 ? draft.getLong("subject_id") : existing == null ? subjects.get(0).getId() : existing.getSubjectId();
         int selected = -1;
@@ -199,7 +194,15 @@ public class ScheduleEditActivity extends AppCompatActivity {
                 selected = i;
             }
         }
-        // Nếu môn vừa lưu trữ, buộc người dùng chọn lại thay vì âm thầm đổi sang môn đầu.
+        // Spinner có thể tự chọn dòng đầu khi setSelection(-1). Dùng dòng nhắc ID 0
+        // để môn vừa lưu trữ không bị âm thầm thay bằng một môn khác.
+        if (selected < 0) {
+            subjects = new ArrayList<>(subjects);
+            subjects.add(0, new Subject(0, getString(R.string.schedule_select_subject),
+                    null, subjects.get(0).getColorHex(), false));
+            selected = 0;
+        }
+        subjectSpinner.setAdapter(new ScheduleSubjectAdapter(this, subjects));
         subjectSpinner.setSelection(selected);
         daySpinner.setSelection(draft != null && draft.containsKey("day")
                 ? draft.getInt("day") - 1 : existing == null
@@ -223,8 +226,28 @@ public class ScheduleEditActivity extends AppCompatActivity {
             reminder = value < 0 ? null : value;
         }
         fillReminders(reminder);
-        ((TextView) findViewById(R.id.schedule_zone)).setText(getString(R.string.schedule_time_zone, zone));
+        TextView zoneText = findViewById(R.id.schedule_zone);
+        zoneText.setText("Asia/Ho_Chi_Minh".equals(zone)
+                ? getString(R.string.schedule_zone_vietnam) : getString(R.string.schedule_time_zone, zone));
         draft = null;
+    }
+
+    private void adaptPickerRows() {
+        android.content.res.Configuration config = getResources().getConfiguration();
+        if (config.screenWidthDp / config.fontScale >= 340) {
+            return;
+        }
+        for (int id : new int[]{R.id.schedule_time_pair, R.id.schedule_date_pair}) {
+            LinearLayout row = findViewById(id);
+            row.setOrientation(LinearLayout.VERTICAL);
+            for (int i = 0; i < row.getChildCount(); i++) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) row.getChildAt(i).getLayoutParams();
+                params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                params.weight = 0;
+                params.setMarginStart(0);
+                row.getChildAt(i).setLayoutParams(params);
+            }
+        }
     }
 
     private void fillReminders(Integer selected) {
@@ -257,7 +280,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
             return;
         }
         int position = subjectSpinner.getSelectedItemPosition();
-        if (position < 0 || position >= subjects.size()) {
+        if (position < 0 || position >= subjects.size() || subjects.get(position).getId() <= 0) {
             showError(getString(R.string.schedule_need_subject));
             return;
         }
