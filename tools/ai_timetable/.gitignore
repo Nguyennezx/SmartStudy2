@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+local_inputs/
+local_runs/
+.env
+*.local.json
