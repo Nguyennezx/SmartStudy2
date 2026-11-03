@@ -12,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -27,6 +30,7 @@ import com.example.smartstudy.schedule.data.ScheduleDAO;
 import com.example.smartstudy.schedule.data.ScheduleRules;
 import com.example.smartstudy.subject.data.Subject;
 import com.example.smartstudy.subject.data.SubjectDAO;
+import com.example.smartstudy.subject.data.SubjectMatcher;
 import com.example.smartstudy.subject.ui.SubjectActivity;
 
 import java.time.LocalDate;
@@ -39,10 +43,12 @@ import java.util.concurrent.Executors;
 public class ScheduleEditActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "schedule_id";
     public static final String EXTRA_DATE = "schedule_selected_date";
+    public static final String EXTRA_IMPORT = "schedule_import_fields";
     private static final ExecutorService loader = Executors.newSingleThreadExecutor();
     private ScheduleEditViewModel model;
     private Spinner subjectSpinner;
     private Spinner daySpinner;
+    private boolean dayHasPlaceholder;
     private Spinner reminderSpinner;
     private Button startButton;
     private Button endButton;
@@ -61,6 +67,16 @@ public class ScheduleEditActivity extends AppCompatActivity {
     private Bundle draft;
     private DatePickerDialog dateDialog;
     private TimePickerDialog timeDialog;
+    private String importName = "", importTeacher = "";
+    private boolean subjectMatchAttempted;
+    private long createdSubjectId;
+    private SubjectMatcher.Result subjectMatch;
+    private final ActivityResultLauncher<Intent> createSubject = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    createdSubjectId = result.getData().getLongExtra(SubjectActivity.EXTRA_CREATED_ID, 0);
+                }
+            });
 
     @Override
     protected void onCreate(Bundle state) {
@@ -74,7 +90,14 @@ public class ScheduleEditActivity extends AppCompatActivity {
             return insets;
         });
         editingId = getIntent().getLongExtra(EXTRA_ID, 0);
-        draft = state;
+        draft = state != null ? state : editingId == 0 ? getIntent().getBundleExtra(EXTRA_IMPORT) : null;
+        Bundle imported = getIntent().getBundleExtra(EXTRA_IMPORT);
+        if (editingId == 0 && imported != null) {
+            importName = imported.getString("import_subject_name", "");
+            importTeacher = imported.getString("import_teacher_name", "");
+        }
+        subjectMatchAttempted = state != null && state.getBoolean("subject_match_attempted");
+        createdSubjectId = state == null ? 0 : state.getLong("created_subject_id", 0);
         subjectSpinner = findViewById(R.id.schedule_input_subject);
         daySpinner = findViewById(R.id.schedule_input_day);
         reminderSpinner = findViewById(R.id.schedule_input_reminder);
@@ -93,6 +116,16 @@ public class ScheduleEditActivity extends AppCompatActivity {
         findViewById(R.id.schedule_edit_back).setOnClickListener(v -> finish());
         findViewById(R.id.schedule_edit_subjects).setOnClickListener(v ->
                 startActivity(new Intent(this, SubjectActivity.class)));
+        findViewById(R.id.import_subject_add).setOnClickListener(v -> {
+            if (loading || model.isSaving()) return;
+            createSubject.launch(new Intent(this, SubjectActivity.class)
+                    .putExtra(SubjectActivity.EXTRA_CREATE_NAME, importName)
+                    .putExtra(SubjectActivity.EXTRA_CREATE_TEACHER, importTeacher));
+        });
+        subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { showSubjectMatch(); }
+            @Override public void onNothingSelected(AdapterView<?> parent) { showSubjectMatch(); }
+        });
         startButton.setOnClickListener(v -> pickTime(startButton, false));
         endButton.setOnClickListener(v -> pickTime(endButton, true));
         fromButton.setOnClickListener(v -> pickDate(fromButton));
@@ -116,6 +149,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
             }
             if (message.isEmpty()) {
                 Toast.makeText(this, R.string.schedule_saved, Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
                 finish();
             } else {
                 showError(message);
@@ -146,7 +180,10 @@ public class ScheduleEditActivity extends AppCompatActivity {
         loader.execute(() -> {
             try {
                 ScheduleDAO dao = new ScheduleDAO(this);
-                List<Subject> available = new SubjectDAO(this).getActiveSubjects();
+                SubjectDAO subjectDAO = new SubjectDAO(this);
+                List<Subject> available = subjectDAO.getActiveSubjects();
+                SubjectMatcher.Result matched = SubjectMatcher.find(importName, available,
+                        importName.isEmpty() ? java.util.Collections.emptyList() : subjectDAO.getByArchived(true));
                 Schedule existing = editingId > 0 ? dao.getById(editingId) : null;
                 if (editingId > 0 && existing == null) {
                     throw new IllegalArgumentException("Lịch học không còn tồn tại.");
@@ -158,13 +195,15 @@ public class ScheduleEditActivity extends AppCompatActivity {
                     }
                     loading = false;
                     subjects = available;
+                    subjectMatch = matched;
                     zone = timeZone;
-                    if (subjects.isEmpty()) {
+                    if (subjects.isEmpty() && importName.isEmpty()) {
                         loaded = false;
                         showError(getString(R.string.schedule_need_subject));
                         return;
                     }
                     populate(existing);
+                    showSubjectMatch();
                     loaded = true;
                     errorText.setVisibility(View.GONE);
                     enableForm(true);
@@ -187,7 +226,15 @@ public class ScheduleEditActivity extends AppCompatActivity {
 
     private void populate(Schedule existing) {
         long subjectId = draft != null && draft.containsKey("subject_id")
-                ? draft.getLong("subject_id") : existing == null ? subjects.get(0).getId() : existing.getSubjectId();
+                ? draft.getLong("subject_id") : existing == null ? subjects.isEmpty() ? 0 : subjects.get(0).getId() : existing.getSubjectId();
+        if (!importName.isEmpty() && !subjectMatchAttempted) {
+            if (subjectId <= 0) subjectId = subjectMatch.uniqueId();
+            subjectMatchAttempted = true;
+        }
+        if (createdSubjectId > 0) {
+            subjectId = createdSubjectId;
+            createdSubjectId = 0;
+        }
         int selected = -1;
         for (int i = 0; i < subjects.size(); i++) {
             if (subjects.get(i).getId() == subjectId) {
@@ -199,14 +246,20 @@ public class ScheduleEditActivity extends AppCompatActivity {
         if (selected < 0) {
             subjects = new ArrayList<>(subjects);
             subjects.add(0, new Subject(0, getString(R.string.schedule_select_subject),
-                    null, subjects.get(0).getColorHex(), false));
+                    null, subjects.isEmpty() ? String.format(java.util.Locale.ROOT, "#%06X", getColor(R.color.PeriwinkleBlue) & 0xffffff)
+                            : subjects.get(0).getColorHex(), false));
             selected = 0;
         }
         subjectSpinner.setAdapter(new ScheduleSubjectAdapter(this, subjects));
         subjectSpinner.setSelection(selected);
-        daySpinner.setSelection(draft != null && draft.containsKey("day")
-                ? draft.getInt("day") - 1 : existing == null
-                ? defaultDate().getDayOfWeek().getValue() - 1 : existing.getDayOfWeek() - 1);
+        int chosenDay = draft != null && draft.containsKey("day") ? draft.getInt("day")
+                : existing == null ? defaultDate().getDayOfWeek().getValue() : existing.getDayOfWeek();
+        dayHasPlaceholder = chosenDay < 1 || chosenDay > 7;
+        List<String> dayLabels = new ArrayList<>();
+        if (dayHasPlaceholder) dayLabels.add(getString(R.string.import_pick_day));
+        java.util.Collections.addAll(dayLabels, getResources().getStringArray(R.array.schedule_days));
+        daySpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dayLabels));
+        daySpinner.setSelection(dayHasPlaceholder ? 0 : chosenDay - 1);
         setTime(startButton, draft != null && draft.containsKey("start")
                 ? draft.getInt("start") : existing == null ? 510 : existing.getStartMinute());
         setTime(endButton, draft != null && draft.containsKey("end")
@@ -230,6 +283,34 @@ public class ScheduleEditActivity extends AppCompatActivity {
         zoneText.setText("Asia/Ho_Chi_Minh".equals(zone)
                 ? getString(R.string.schedule_zone_vietnam) : getString(R.string.schedule_time_zone, zone));
         draft = null;
+    }
+
+    private void showSubjectMatch() {
+        View banner = findViewById(R.id.import_subject_banner);
+        if (importName.isEmpty() || subjectMatch == null) { banner.setVisibility(View.GONE); return; }
+        int position = subjectSpinner.getSelectedItemPosition();
+        if (position >= 0 && position < subjects.size() && subjects.get(position).getId() > 0) {
+            banner.setVisibility(View.GONE);
+            return;
+        }
+        banner.setVisibility(View.VISIBLE);
+        String message;
+        boolean canCreate = subjectMatch.exact.isEmpty() && subjectMatch.archived.isEmpty();
+        if (!subjectMatch.exact.isEmpty()) {
+            message = getString(R.string.import_subject_ambiguous, importName);
+        } else if (!subjectMatch.archived.isEmpty()) {
+            message = getString(R.string.import_subject_archived, importName);
+        } else if (!subjectMatch.suggestions.isEmpty()) {
+            StringBuilder names = new StringBuilder();
+            for (Subject suggestion : subjectMatch.suggestions) {
+                if (names.length() > 0) names.append(", ");
+                names.append(suggestion.getName());
+                if (names.length() > 250) break;
+            }
+            message = getString(R.string.import_subject_suggest, importName, names.toString());
+        } else message = getString(R.string.import_subject_missing, importName);
+        ((TextView) findViewById(R.id.import_subject_message)).setText(message);
+        findViewById(R.id.import_subject_add).setVisibility(canCreate ? View.VISIBLE : View.GONE);
     }
 
     private void adaptPickerRows() {
@@ -285,7 +366,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
             return;
         }
         Schedule schedule = new Schedule(editingId, subjects.get(position).getId(),
-                daySpinner.getSelectedItemPosition() + 1, (Integer) startButton.getTag(),
+                daySpinner.getSelectedItemPosition() + (dayHasPlaceholder ? 0 : 1), (Integer) startButton.getTag(),
                 (Integer) endButton.getTag(), (String) fromButton.getTag(), (String) toButton.getTag(),
                 zone, roomInput.getText().toString(), noteInput.getText().toString(),
                 reminders.get(reminderSpinner.getSelectedItemPosition()));
@@ -302,6 +383,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
 
     private void pickTime(Button button, boolean end) {
         int minute = (Integer) button.getTag();
+        if (minute < 0) minute = 480;
         timeDialog = new TimePickerDialog(this, (picker, hour, min) -> {
             int chosen = hour * 60 + min;
             setTime(button, end && chosen == 0 ? 1440 : chosen);
@@ -310,7 +392,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
     }
 
     private void pickDate(Button button) {
-        LocalDate date = LocalDate.parse((String) button.getTag());
+        LocalDate date = button.getTag() == null ? defaultDate() : LocalDate.parse((String) button.getTag());
         dateDialog = new DatePickerDialog(this, (picker, year, month, day) ->
                 setDate(button, LocalDate.of(year, month + 1, day).toString()),
                 date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
@@ -319,12 +401,13 @@ public class ScheduleEditActivity extends AppCompatActivity {
 
     private void setTime(Button button, int minute) {
         button.setTag(minute);
-        button.setText(ScheduleRules.formatMinute(minute));
+        button.setText(minute < 0 ? getString(R.string.import_pick_time) : ScheduleRules.formatMinute(minute));
     }
 
     private void setDate(Button button, String date) {
         button.setTag(date);
-        button.setText(LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        button.setText(date == null ? getString(R.string.import_pick_date)
+                : LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     private void enableForm(boolean enabled) {
@@ -338,6 +421,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
         }
         findViewById(R.id.schedule_edit_subjects).setEnabled(!model.isSaving());
         findViewById(R.id.schedule_edit_back).setEnabled(!model.isSaving());
+        findViewById(R.id.import_subject_add).setEnabled(enabled && !model.isSaving());
     }
 
     private void showError(String message) {
@@ -350,7 +434,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
         Bundle result = new Bundle();
         int position = subjectSpinner.getSelectedItemPosition();
         result.putLong("subject_id", position < 0 ? -1 : subjects.get(position).getId());
-        result.putInt("day", daySpinner.getSelectedItemPosition() + 1);
+        result.putInt("day", daySpinner.getSelectedItemPosition() + (dayHasPlaceholder ? 0 : 1));
         result.putInt("start", (Integer) startButton.getTag());
         result.putInt("end", (Integer) endButton.getTag());
         result.putString("from", (String) fromButton.getTag());
@@ -368,6 +452,8 @@ public class ScheduleEditActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle state) {
+        state.putBoolean("subject_match_attempted", subjectMatchAttempted);
+        state.putLong("created_subject_id", createdSubjectId);
         if (loaded) {
             state.putAll(captureDraft());
         } else if (draft != null) {

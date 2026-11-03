@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_import_draft"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <CheckBox
+        android:id="@+id/import_row_check"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:buttonTint="@color/PeriwinkleBlue"
+        android:contentDescription="@string/import_select"
+        android:focusable="false" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/import_row_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/header_title"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/import_row_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/header_icon"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/import_row_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/PeriwinkleBlue"
+            android:textSize="13sp" />
+    </LinearLayout>
+</LinearLayout>

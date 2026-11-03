@@ -48,6 +48,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ScheduleFragment extends Fragment {
+    public static final String REQUEST_OPEN_DAY = "schedule_open_day";
+    public static final String REQUEST_DATE = "date";
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     private View screen;
     private ScheduleDAO dao;
@@ -116,6 +118,20 @@ public class ScheduleFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle state) {
+        super.onViewCreated(view, state);
+        getParentFragmentManager().setFragmentResultListener(REQUEST_OPEN_DAY, getViewLifecycleOwner(),
+                (key, request) -> {
+                    String date = request.getString(REQUEST_DATE);
+                    if (date == null) return;
+                    try { selectedDate = LocalDate.parse(date); }
+                    catch (java.time.DateTimeException invalid) { return; }
+                    weekMode = false;
+                    loadSchedules();
+                });
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         loadSchedules();
@@ -143,6 +159,15 @@ public class ScheduleFragment extends Fragment {
         if (busy) {
             return;
         }
+        activeDialog = new AlertDialog.Builder(dialogContext())
+                .setTitle(R.string.schedule_add)
+                .setItems(R.array.schedule_add_methods, (dialog, which) -> {
+                    if (which == 0) openManualSchedule();
+                    else startActivity(new Intent(requireContext(), com.example.smartstudy.schedule.ui.ImportDraftActivity.class));
+                }).show();
+    }
+
+    private void openManualSchedule() {
         Intent intent = new Intent(requireContext(), ScheduleEditActivity.class);
         if (selectedDate != null) {
             intent.putExtra(ScheduleEditActivity.EXTRA_DATE, selectedDate.toString());

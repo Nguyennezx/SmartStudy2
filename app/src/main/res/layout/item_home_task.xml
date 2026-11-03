@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/home_task_row"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:minHeight="76dp"
+    android:paddingVertical="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@drawable/ic_form_note"
+        android:layout_marginEnd="12dp"
+        android:importantForAccessibility="no" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_task_title"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/header_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_task_subject"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textColor="@color/header_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/home_task_due"
+        android:layout_marginStart="10dp"
+        android:gravity="end"
+        android:textSize="12sp"
+        android:textColor="@color/header_icon" />
+</LinearLayout>

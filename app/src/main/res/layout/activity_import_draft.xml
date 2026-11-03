@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/import_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+        <ImageButton
+            android:id="@+id/import_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/import_back"
+            android:padding="12dp"
+            android:src="@drawable/ic_subject_back" />
+        <TextView
+            android:id="@+id/import_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:text="@string/import_title"
+            android:textColor="@color/header_title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <ImageButton
+            android:id="@+id/import_connection"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/import_connection"
+            android:padding="14dp"
+            android:src="@android:drawable/ic_menu_preferences"
+            android:tint="@color/header_avatar_foreground" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/import_intro"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="20dp">
+            <TextView
+                android:id="@+id/import_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="@string/import_scan_subtitle"
+                android:textColor="@color/header_avatar_foreground"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_import_upload"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <ImageView
+                    android:id="@+id/import_illustration"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="4dp"
+                    android:adjustViewBounds="true"
+                    android:importantForAccessibility="no"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/anhnen" />
+                <TextView
+                    android:id="@+id/import_upload_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center"
+                    android:text="@string/import_upload_title"
+                    android:textColor="@color/header_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/import_upload_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:text="@string/import_upload_hint"
+                    android:textColor="@color/header_avatar_foreground"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/import_action_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/import_take_photo"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:minWidth="0dp"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="10dp"
+                        android:text="@string/import_take_photo"
+                        android:textAllCaps="false"
+                        android:textColor="@color/PeriwinkleBlue"
+                        android:textSize="13sp"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_import_camera"
+                        app:iconPadding="6dp"
+                        app:iconSize="18dp"
+                        app:iconTint="@color/PeriwinkleBlue"
+                        app:strokeColor="@color/PeriwinkleBlue" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/import_choose_image"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/PeriwinkleBlue"
+                        android:minWidth="0dp"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="10dp"
+                        android:text="@string/import_choose_short"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_import_gallery"
+                        app:iconPadding="6dp"
+                        app:iconSize="18dp"
+                        app:iconTint="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_import_notice"
+                android:drawableStart="@drawable/ic_form_note"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:text="@string/import_help"
+                android:textColor="@color/header_icon"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/import_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:text="@string/import_steps"
+                android:textColor="@color/header_avatar_foreground"
+                android:textSize="12sp" />
+            <ProgressBar
+                android:id="@+id/import_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/PeriwinkleBlue"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/import_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:accessibilityLiveRegion="polite"
+                android:gravity="center"
+                android:textColor="@color/PeriwinkleBlue"
+                android:textSize="14sp"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/import_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:textColor="@color/header_icon"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/import_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/PeriwinkleBlue"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+    <ListView
+        android:id="@+id/import_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="12dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp"
+        android:visibility="gone" />
+    <Button
+        android:id="@+id/import_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/PeriwinkleBlue"
+        android:minHeight="48dp"
+        android:text="@string/import_next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+</LinearLayout>

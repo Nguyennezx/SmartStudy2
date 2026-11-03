@@ -31,6 +31,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class SubjectActivity extends AppCompatActivity {
+    public static final String EXTRA_CREATE_NAME = "create_subject_name";
+    public static final String EXTRA_CREATE_TEACHER = "create_subject_teacher";
+    public static final String EXTRA_CREATED_ID = "created_subject_id";
     // Chung một hàng đợi: khi xoay màn hình, lần đọc mới chờ lần ghi cũ hoàn tất.
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     private SubjectDAO dao;
@@ -90,6 +93,12 @@ public class SubjectActivity extends AppCompatActivity {
             selectedSemester = state.getLong("semester_filter", SubjectDAO.ALL_SEMESTERS);
         if (state != null && state.getBoolean("form_open"))
             pendingDraft = new Bundle(state);
+        if (state == null && getIntent().hasExtra(EXTRA_CREATE_NAME)) {
+            pendingDraft = new Bundle();
+            pendingDraft.putBoolean("form_open", true);
+            pendingDraft.putString("draft_name", getIntent().getStringExtra(EXTRA_CREATE_NAME));
+            pendingDraft.putString("draft_teacher", getIntent().getStringExtra(EXTRA_CREATE_TEACHER));
+        }
         adapter = new SubjectAdapter(this);
         status = filters.findViewById(R.id.subject_status);
         count = filters.findViewById(R.id.subject_count);
@@ -346,16 +355,23 @@ public class SubjectActivity extends AppCompatActivity {
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
             executor.execute(() -> {
                 try {
+                    long createdId = 0;
                     if (subject == null)
-                        dao.insert(subjectName, teacherName, selectedColor, semesterId);
+                        createdId = dao.insert(subjectName, teacherName, selectedColor, semesterId);
                     else if (!dao.update(subject.getId(), subjectName, teacherName, selectedColor, semesterId))
                         throw new IllegalStateException();
+                    final long resultId = createdId;
                     runOnUiThread(() -> {
                         if (!alive())
                             return;
                         saving = false;
                         dialog.dismiss();
                         toast(R.string.subject_saved);
+                        if (resultId > 0 && getIntent().hasExtra(EXTRA_CREATE_NAME)) {
+                            setResult(RESULT_OK, new Intent().putExtra(EXTRA_CREATED_ID, resultId));
+                            finish();
+                            return;
+                        }
                         // Đưa bộ lọc tới học kỳ vừa lưu để người dùng luôn thấy môn.
                         selectedSemester = chosenSemester;
                         if (subject == null && archivedFilter.isChecked())

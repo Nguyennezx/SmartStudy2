@@ -1,16 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeFragment">
-
-    <TextView
+    android:id="@+id/home_root"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:scrollbars="none">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/nav_home"
-        android:textColor="@color/header_title"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@color/header_title"
+            android:text="@string/nav_home" />
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_date"
+            android:layout_marginTop="3dp"
+            android:textSize="14sp"
+            android:textColor="@color/header_subtitle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_zone"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            android:textSize="12sp"
+            android:textColor="@color/header_subtitle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_status"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="12dp"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone"
+            android:textSize="14sp"
+            android:textColor="@color/header_icon" />
+
+        <ProgressBar
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/home_loading"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_featured"
+                android:orientation="vertical"
+                android:padding="18dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_home_featured"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/home_feature_status"
+                        android:layout_weight="1"
+                        android:textSize="13sp"
+                        android:textColor="@color/header_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/home_feature_badge"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/PeriwinkleBlue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/home_feature_title"
+                        android:layout_weight="1"
+                        android:layout_marginTop="12dp"
+                        android:textStyle="bold"
+                        android:textSize="21sp"
+                        android:textColor="@color/header_title" />
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="28sp"
+                        android:textColor="@color/PeriwinkleBlue"
+                        android:text="›" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/home_feature_time"
+                    android:layout_marginTop="10dp"
+                    android:drawableStart="@drawable/ic_form_clock"
+                    android:drawablePadding="8dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/header_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/home_feature_room"
+                    android:layout_marginTop="6dp"
+                    android:drawableStart="@drawable/ic_form_room"
+                    android:drawablePadding="8dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/header_icon" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_no_lessons"
+                android:layout_marginTop="18dp"
+                android:padding="18dp"
+                android:background="@drawable/bg_subject_card"
+                android:visibility="gone"
+                android:textSize="15sp"
+                android:textColor="@color/header_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="4dp"
+                android:minHeight="48dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="@color/header_title"
+                    android:text="@string/home_remaining" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/home_view_schedule"
+                    android:minHeight="48dp"
+                    android:gravity="center"
+                    android:paddingLeft="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:textSize="13sp"
+                    android:textColor="@color/PeriwinkleBlue"
+                    android:text="@string/home_view_schedule" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_lessons"
+                android:orientation="vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_lessons_empty"
+                android:paddingVertical="12dp"
+                android:textSize="14sp"
+                android:textColor="@color/header_icon"
+                android:text="@string/home_no_remaining" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="4dp"
+                android:minHeight="48dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="@color/header_title"
+                    android:text="@string/home_tasks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_tasks"
+                android:orientation="vertical"
+                android:background="@drawable/bg_subject_card"
+                android:paddingHorizontal="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_tasks_empty"
+                android:paddingVertical="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/header_icon"
+                android:text="@string/home_no_tasks" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_focus"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_form_clock"
+                android:drawablePadding="8dp"
+                android:paddingVertical="8dp"
+                android:textSize="14sp"
+                android:textColor="@color/header_icon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="@color/header_subtitle"
+                android:text="@string/home_focus_note" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_start_study"
+                android:minHeight="50dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:padding="12dp"
+                android:background="@drawable/bg_calendar_selected"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="@string/home_start" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

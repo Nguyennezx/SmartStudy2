@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_view_schedule">Xem lịch ›</string>
+    <string name="home_remaining">Lịch còn lại hôm nay</string>
+    <string name="home_tasks">Bài tập gần hạn</string>
+    <string name="home_no_remaining">Không còn buổi học nào khác hôm nay.</string>
+    <string name="home_no_tasks">Không có bài tập quá hạn hoặc đến hạn trong 7 ngày tới.</string>
+    <string name="home_no_lessons">Hôm nay chưa có lịch học. Bạn có thể thêm lịch trong tab Lịch học.</string>
+    <string name="home_finished">Bạn đã hết lịch học hôm nay.</string>
+    <string name="home_start">▷  Bắt đầu học</string>
+    <string name="home_focus">Đã tập trung hôm nay: %1$s</string>
+    <string name="home_focus_note">Tính thời gian đã ghi nhận của các phiên bắt đầu hôm nay.</string>
+    <string name="home_loading">Đang tải hôm nay…</string>
+    <string name="home_upcoming">Buổi học tiếp theo</string>
+    <string name="home_ongoing">Đang trong giờ học</string>
+    <string name="home_now">Đang học</string>
+    <string name="home_minutes_until">Còn %1$d phút</string>
+    <string name="home_hours_until">Còn %1$d giờ %2$d phút</string>
+    <string name="home_duration_minutes">%1$d phút</string>
+    <string name="home_duration_hours">%1$d giờ %2$d phút</string>
+    <string name="home_today">Hôm nay</string>
+    <string name="home_tomorrow">Ngày mai</string>
+    <string name="home_overdue">Quá hạn</string>
+    <string name="home_due">Hạn nộp: %1$s</string>
+    <string name="home_teacher">Giảng viên: %1$s</string>
+    <string name="home_no_teacher">Chưa thêm giảng viên</string>
+    <string name="home_no_description">Chưa có mô tả.</string>
+    <string name="home_detail_accessibility">Xem chi tiết buổi học %1$s</string>
+</resources>

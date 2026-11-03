@@ -1,0 +1,61 @@
+{
+  "observed_scope": "dated_week",
+  "week_start": "2026-10-19",
+  "semester_text": "Học kỳ 1",
+  "academic_year_text": "2026-2027",
+  "cohort_text": null,
+  "lessons": [
+    {
+      "subject_text": "Tương tác người máy",
+      "date": "2026-10-19",
+      "weekday": "MON",
+      "start_time": "07:00",
+      "end_time": "10:35",
+      "period_start": 1,
+      "period_end": 4,
+      "time_basis": "explicit",
+      "room": "1A203-A203",
+      "recurrence_kind": "single",
+      "source_text": "Tương tác người máy; Thứ 2 (19/10); Phòng: 1A203-A203; 07:00 → 10:35"
+    },
+    {
+      "subject_text": "Quản lý dự án phần mềm",
+      "date": "2026-10-19",
+      "weekday": "MON",
+      "start_time": "13:00",
+      "end_time": "16:35",
+      "period_start": 7,
+      "period_end": 10,
+      "time_basis": "explicit",
+      "room": "1A203-A203",
+      "recurrence_kind": "single",
+      "source_text": "Quản lý dự án phần mềm; Thứ 2 (19/10); Phòng: 1A203-A203; 13:00 → 16:35"
+    },
+    {
+      "subject_text": "Phát triển ứng dụng cho các thiết bị di động",
+      "date": "2026-10-21",
+      "weekday": "WED",
+      "start_time": "13:00",
+      "end_time": "16:35",
+      "period_start": 7,
+      "period_end": 10,
+      "time_basis": "explicit",
+      "room": "1A106-Quan 1",
+      "recurrence_kind": "single",
+      "source_text": "Phát triển ứng dụng cho các thiết bị di động; Thứ 4 (21/10); Phòng: 1A106-Quan 1; 13:00 → 16:35"
+    },
+    {
+      "subject_text": "Phát triển hệ thống thông minh",
+      "date": "2026-10-23",
+      "weekday": "FRI",
+      "start_time": "07:00",
+      "end_time": "10:35",
+      "period_start": 1,
+      "period_end": 4,
+      "time_basis": "explicit",
+      "room": "1A104-Quan 1",
+      "recurrence_kind": "single",
+      "source_text": "Phát triển hệ thống thông minh; Thứ 6 (23/10); Phòng: 1A104-Quan 1; 07:00 → 10:35"
+    }
+  ]
+}

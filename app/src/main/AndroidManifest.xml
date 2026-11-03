@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -16,6 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStudy">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.timetable.images"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/timetable_capture_paths" />
+        </provider>
 
         <receiver
             android:name=".schedule.reminder.ScheduleAlarmReceiver"
@@ -34,6 +45,11 @@
             </intent-filter>
 
         </receiver>
+
+        <activity
+            android:name=".schedule.ui.ImportDraftActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SmartStudy.Subject" />
 
         <activity
             android:name=".schedule.ui.ScheduleEditActivity"

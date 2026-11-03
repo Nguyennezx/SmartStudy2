@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/home_lesson_row"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:minHeight="80dp"
+    android:paddingVertical="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_row_start"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/header_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_row_end"
+            android:layout_marginTop="4dp"
+            android:textSize="13sp"
+            android:textColor="@color/header_icon" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="3dp"
+        android:layout_height="44dp"
+        android:id="@+id/home_row_stripe"
+        android:layout_marginEnd="14dp"
+        android:background="@color/PeriwinkleBlue" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_row_title"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/header_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/home_row_room"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_form_room"
+            android:drawablePadding="6dp"
+            android:textSize="13sp"
+            android:textColor="@color/header_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="@color/header_icon"
+        android:text="›" />
+</LinearLayout>

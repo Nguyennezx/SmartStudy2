@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="import_title">Quét ảnh TKB (AI)</string>
+    <string name="import_results_title">Kiểm tra lịch đã nhận diện</string>
+    <string name="import_image_source">Quét ảnh TKB (AI)</string>
+    <string name="import_source_unavailable">Máy chưa có ứng dụng phù hợp. Bạn có thể chọn ảnh có sẵn.</string>
+    <string name="import_camera_error">Chưa mở được máy ảnh. Thử lại hoặc chọn ảnh có sẵn.</string>
+    <string-array name="schedule_add_methods">
+        <item>Thêm lịch thủ công</item>
+        <item>Quét ảnh TKB (AI)</item>
+    </string-array>
+    <string-array name="import_image_sources">
+        <item>Chụp ảnh</item>
+        <item>Chọn ảnh có sẵn</item>
+    </string-array>
+    <string name="import_back">Quay lại</string>
+    <string name="import_select">Chọn buổi học</string>
+    <string name="import_help">Đối chiếu từng buổi với thời khóa biểu và chỉ lưu sau khi kiểm tra.</string>
+    <string name="import_count">%1$d buổi · Đã lưu %2$d buổi</string>
+    <string name="import_empty">Chọn ảnh thời khóa biểu để bắt đầu.</string>
+    <string name="import_choose_image">Chọn ảnh có sẵn</string>
+    <string name="import_take_photo">Chụp ảnh</string>
+    <string name="import_connection">Kết nối</string>
+    <string name="import_server_address">Địa chỉ máy chủ (backend)</string>
+    <string name="import_server_token">Mã kết nối (AI_IMPORT_TOKEN)</string>
+    <string name="import_nothing_found">Chưa đọc được buổi học nào. Thử chọn ảnh rõ hơn.</string>
+    <string name="import_invalid">Không mở được bản nháp. Dữ liệu không hợp lệ hoặc quá lớn.</string>
+    <string name="import_next">Kiểm tra buổi tiếp theo</string>
+    <string name="import_no_next">Không còn buổi có thể mở trong form. Kiểm tra các dòng cần xử lý riêng.</string>
+    <string name="import_pick_time">Chọn giờ</string>
+    <string name="import_pick_date">Chọn ngày</string>
+    <string name="import_pick_day">Chọn thứ</string>
+    <string name="import_subject_missing">Chưa có môn “%1$s”. Thêm môn để tiếp tục, hoặc chọn môn tương ứng ở ô Môn học.</string>
+    <string name="import_subject_ambiguous">Tên “%1$s” đã có trong danh sách. Hãy chọn đúng môn và học kỳ ở ô Môn học.</string>
+    <string name="import_subject_archived">Môn “%1$s” đã được lưu trữ. Vào Quản lý để xem và khôi phục nếu cần, hoặc chọn một môn đang dùng. App không tự khôi phục môn.</string>
+    <string name="import_subject_suggest">Chưa khớp chính xác môn “%1$s”. Gợi ý: %2$s. Chọn môn phù hợp ở ô Môn học, hoặc thêm môn mới.</string>
+    <string name="import_scan_subtitle">Tự động nhận diện lịch học từ hình ảnh</string>
+    <string name="import_upload_title">Chụp hoặc tải lên ảnh\nthời khóa biểu</string>
+    <string name="import_upload_hint">Chọn ảnh rõ nét để AI đọc đầy đủ\nthông tin các buổi học.</string>
+    <string name="import_choose_short">Chọn từ thư viện</string>
+    <string name="import_steps">① Chụp / chọn ảnh  →  ② AI nhận diện\n③ Kiểm tra và lưu</string>
+</resources>

@@ -1,6 +1,6 @@
 # Render Free — chuẩn bị backend online (01/11/2026)
 
-Trạng thái: đã chuẩn bị source/cấu hình và kiểm thử cục bộ; CHƯA tạo dịch vụ Render, chưa có URL HTTPS, chưa kiểm tra từ điện thoại qua Internet. Không mặc định đã triển khai chỉ vì có render.yaml.
+Cập nhật 03/11/2026: đã triển khai Render tại https://smartstudy-timetable-ai.onrender.com, health trả status ok. Người dùng xác nhận quét/lưu và đổi Wi-Fi vẫn gọi được, không cần server laptop. Các bước bên dưới là hướng dẫn thiết lập/tái triển khai; không chứa API key hoặc token.
 
 ## Cấu hình đã chuẩn bị
 
@@ -25,7 +25,7 @@ Trạng thái: đã chuẩn bị source/cấu hình và kiểm thử cục bộ;
 
 ## Phần đã kiểm tra
 
-55 Python tests đạt gồm WSGI validator, health, xác thực, body lỗi, giới hạn lượt, request đang bận và lỗi AI không trả bí mật. Chưa test Gunicorn trong Linux hoặc deploy Render thật. Chưa có tài khoản Render được kết nối trong phiên này.
+55 Python tests đạt gồm WSGI validator, health, xác thực, body lỗi, giới hạn lượt, request đang bận và lỗi AI không trả bí mật. Sau đó đã deploy Gunicorn trên Render thành công và người dùng đã thử luồng trên điện thoại (01/11/2026).
 
 Render Free ngủ sau 15 phút không có traffic và có thể mất khoảng một phút để khởi động. App đã tăng request timeout lên 180 giây, vẫn không retry tự động để tránh gọi AI lặp. Hạn mức và điều kiện miễn phí do Render/Gemini quản lý; kiểm tra dashboard trước khi đồng ý thay gói.
 
